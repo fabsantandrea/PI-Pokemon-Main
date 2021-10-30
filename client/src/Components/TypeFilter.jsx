@@ -1,0 +1,25 @@
+import { useEffect} from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { getTypes, sortByType } from "../Actions"
+let state = {}
+export default function TypeFilter () {
+    const pokemons = useSelector(state => state.pokemons)
+    useEffect(() => dispatch(getTypes()), [])
+    const dispatch = useDispatch()
+    const types = useSelector(state => state.types)
+    const handleChange = (e) => {
+        state[e.target.name] = e.target.value
+        console.log(state)
+        dispatch(sortByType({state, pokemons}))
+    }
+   
+    return <div>
+        
+        <select name= 'type' onChange={handleChange}>
+            <option>Type:</option>
+            {types.map(type => (
+                <option key={type.id} value={type.name}>{type.name}</option>
+            ))}
+            </select>
+    </div>
+}

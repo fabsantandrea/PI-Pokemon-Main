@@ -10,41 +10,25 @@ router.use(express.json())
 // Ejemplo: router.use('/auth', authRouter);
 let typeId = 1
 
-async function getFromApi() {
-    const getTypes = await axios.get('https://pokeapi.co/api/v2/type')
-    const results = getTypes.data.results
-   results.forEach(type => {
-        Types.create({
-            id: typeId++,
-            name: type.name
-        })})
-}
 
 router.get('/', async (req, res, next) => {
     const dbTypes = await Types.findAll()
-    await getFromApi()
-    return res.send(dbTypes) 
-           
-})
-
-// router.get('/', async (req, res, next) => {
-//     const dbTypes = await Types.findAll()
-//     if (dbTypes.length === 0) {
-//         const getTypes = await axios.get('https://pokeapi.co/api/v2/type')
-//         const results = getTypes.data.results
-//         results.forEach(type => {
-//             Types.create({
-//                 id: typeId++,
-//                 name: type.name
-//             })
-//         })
-//         return res.send(results)
-//     } else {
-//         console.log('entre')
-//         return res.send(dbTypes)
-//     }
+    if (dbTypes.length === 0) {
+        const getTypes = await axios.get('https://pokeapi.co/api/v2/type')
+        const results = getTypes.data.results
+        results.forEach(type => {
+            Types.create({
+                id: typeId++,
+                name: type.name
+            })
+        })
+        return res.send(results)
+    } else {
+        console.log('entre')
+        return res.send(dbTypes)
+    }
     
-// })
+})
 
 
 // const getTipos = axios.get('https://pokeapi.co/api/v2/type')
