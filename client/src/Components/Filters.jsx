@@ -39,7 +39,7 @@ export default function Filters() {
 
     return <div>
         <select name= 'sort' onChange={handleChange} >
-        <option >A-Z</option>
+        <option >Asc-Desc</option>
             <option value= 'desc'>Descendente</option>
             <option value= 'asc'>Ascendente</option>
         </select>

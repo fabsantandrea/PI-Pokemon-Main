@@ -1,4 +1,6 @@
+import { PokemonStyle } from "../Styles/PokemonStyle";
 
+import pokedex from "../Storage/Pokedex.png"
 
 String.prototype.capitalizeFirstLetter = function () {
   if (this){
@@ -8,6 +10,8 @@ String.prototype.capitalizeFirstLetter = function () {
 export default function PokemonDetailCard({name,image,type, attack, hp, defense, speed, weight, height, id}) {
     
     return <div>
+     
+     {/* <img src={pokedex} style={{width:'60%'}} ></img> */}
          <div>
            <h1>{name.capitalizeFirstLetter()}</h1>
         </div>
@@ -24,5 +28,6 @@ export default function PokemonDetailCard({name,image,type, attack, hp, defense,
         <div><span>Weight:{weight}</span></div>
         <div><span>Height:{height}</span></div>
         <div><span>ID:{id}</span></div>
+        
           </div>
 }

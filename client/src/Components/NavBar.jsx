@@ -15,17 +15,18 @@ export default function NavBar () {
         dispatch(deleteQuery())
         
     }
-    return <nav style={{background: '#b5463c', borderRadius: '1px'}}>
+    return <nav style={{background: '#b5463c', borderRadius: '1px', height:'100px'}}>
         <h1>Soy el NavBar</h1>
         <div>
             <NavLink to='/home'><button onClick={handleClick}>All Pokemons</button> </NavLink>
             <NavLink to= '/createcharacter'><button>Create Pokemon</button></NavLink>
             <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'flex-end'}}>
             <FilterByDbAndApi/>
-            </div>
-        <SearchBar />
+            <SearchBar />
         <Filters />
         <TypeFilter />
+            </div>
+        
         </div>
         </nav>
 }

@@ -8,7 +8,6 @@ const InitialState = {
 }
 
 function reducer (state = InitialState, action) {
-    console.log(action.payload)
     switch(action.type) {
         case GET_POKEMONS : {
             return {
@@ -65,6 +64,7 @@ function reducer (state = InitialState, action) {
             }
         case SORT_BY_STORAGE : {
             let sortedPokemons = [...state.pokemons]
+            console.log(sortedPokemons)
             if (action.payload === 'db') {
                 let sortedByDb = sortedPokemons.filter(pokemon => pokemon.id.length > 15)
                 console.log(sortedByDb)
@@ -90,7 +90,7 @@ function reducer (state = InitialState, action) {
         case CREATE_POKEMON: {
             return {
                 ...state,
-                filteredPokemons: action.payload.data
+                filteredPokemons: []
             }
         }
         case DELETE_QUERY: {
@@ -108,7 +108,7 @@ function reducer (state = InitialState, action) {
         case DELETE_SORT_BY_TYPE: {
             return {
                 ...state,
-                sortedByType: []
+                filteredPokemons: []
             }
         }
     

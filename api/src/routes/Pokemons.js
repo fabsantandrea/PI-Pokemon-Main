@@ -1,4 +1,4 @@
-const { Router } = require('express');
+const { Router, query } = require('express');
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 const {Pokemons, Types} = require('../db');
@@ -7,6 +7,10 @@ const router = Router();
 const express = require('express');
 router.use(express.json());
 
+function typeArray (array) {
+    let newArray = array.map(type => type.name)
+    return newArray
+}
 function typesToString (type, type2) {
     if (type && type2){
         return type + ', ' + type2
@@ -22,34 +26,40 @@ function reconTypes(array) {
 // Ejemplo: router.use('/auth', authRouter);
 
 router.get('/', async (req, res, next) => { //ESTO ES PARA EL QUERY
-   const {name} = req.query
+   const name = req.query.name
    if (name) {
         try {
-            let queryPokemonDb = Pokemons.findAll({
+            
+            let queryPokemonDb = await Pokemons.findAll({
                 where: {
                     name: name.toLowerCase()
-                }
+                },
+                include: Types
             })
-            .then(response => {
-                if(response.length !== 0) {
+           
+           
+            if(queryPokemonDb.length > 0) {       
+                 const values = queryPokemonDb[0].types
+          
+                const valuesToArray = typeArray(values)
                  return res.send({
-                    name: response[0].dataValues.name,
-                    hp: response[0].dataValues.hp,
-                    attack: response[0].dataValues.attack,
-                    defense: response[0].dataValues.defense,
-                    speed: response[0].dataValues.speed,
-                    weight: response[0].dataValues.weight,
-                    height: response[0].dataValues.height,
-                    id: response[0].dataValues.id,
-                    type: response[0].dataValues.type
+                    name: queryPokemonDb[0].dataValues.name,
+                    hp: queryPokemonDb[0].dataValues.hp,
+                    attack: queryPokemonDb[0].dataValues.attack,
+                    defense: queryPokemonDb[0].dataValues.defense,
+                    speed: queryPokemonDb[0].dataValues.speed,
+                    weight: queryPokemonDb[0].dataValues.weight,
+                    height: queryPokemonDb[0].dataValues.height,
+                    id: queryPokemonDb[0].dataValues.id,
+                 image: queryPokemonDb[0].dataValues.image,
+                 type: reconTypes(valuesToArray)
                  })
                 } else {
-                    let queryPokemon = axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`)
-                    .then(matchedPokemon => {
-                    const data = matchedPokemon.data
+                    let queryPokemon = await axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`)     
+                    const data = queryPokemon.data
                     let pokemonImage = data.sprites.other['official-artwork'].front_default
                     let pokemonStats = data.stats;
-                    let filteredTypes = matchedPokemon.data.types.map(pokemon => pokemon.type.name)
+                    let filteredTypes = queryPokemon.data.types.map(pokemon => pokemon.type.name)
                     return res.send(
                         {
                             name: data.name,
@@ -64,33 +74,36 @@ router.get('/', async (req, res, next) => { //ESTO ES PARA EL QUERY
                             type: reconTypes(filteredTypes)
                 
                         })
-                    })
+                
                 }
-    
-            })
-            .catch(error => {
-                next(error)
-            })
 //-------------------------TERMINA EL QUERY DE DB-----------------------------
   // TERMINA EL QUERY GENERAL
         } catch (error) {
-            next(error)
+            res.status(404).send('Pokemon not found')
         }
    } else { // EMPIEZA EL GET GENERAL
        try {
-           const pokeUrl1 = await axios.get(`https://pokeapi.co/api/v2/pokemon`) //ESTE ES EL GET GENERAL
-    const results1 = pokeUrl1.data.results; //me traigo la primera pagina
+            const pokeUrl1 = await axios.get(`https://pokeapi.co/api/v2/pokemon`) //ESTE ES EL GET GENERAL
+            const results1 =  pokeUrl1.data.results; //me traigo la primera pagina
   
-    const pokeUrl2 = await axios.get(pokeUrl1.data.next);
-    const results2 = pokeUrl2.data.results; //me traigo la segunda
-    let pokemonsPromiseApi = [...results1, ...results2]
-    let pokemonsPromiseDb = Pokemons.findAll();
-    Promise.all([
-        pokemonsPromiseApi, pokemonsPromiseDb  
-    ])
-    .then((response) => {
-        const [pokemonsApi, pokemonsDb] = response
-        let filteredPokemons = pokemonsApi.map(async (pokemon) => {
+            const pokeUrl2 = await axios.get(pokeUrl1.data.next);
+            const results2 =  pokeUrl2.data.results; //me traigo la segunda
+            
+            let pokemonsPromiseApi = [...results1, ...results2]
+            let pokemonsPromiseDb = await Pokemons.findAll({
+                include: Types
+            });
+            let filteredDbPokemons = pokemonsPromiseDb.map(pokemon => {
+                return {
+                    name: pokemon.name,
+                    image: pokemon.image,
+                    id: pokemon.id,
+                    attack: pokemon.attack,
+                    type: reconTypes(typeArray(pokemonsPromiseDb[0].types))
+                }
+            })
+  
+            let filteredPokemons = pokemonsPromiseApi.map(async (pokemon) => {
             let pokemonPromiseDetails = await axios.get(pokemon.url);
             let pokemonStats = pokemonPromiseDetails.data.stats;
             let pokemonImage = pokemonPromiseDetails.data.sprites.other['official-artwork'].front_default
@@ -98,55 +111,33 @@ router.get('/', async (req, res, next) => { //ESTO ES PARA EL QUERY
             let pokemonHeight = pokemonPromiseDetails.data.height;
             let pokemonId = pokemonPromiseDetails.data.id;
             let filteredTypes = pokemonPromiseDetails.data.types.map(pokemon => pokemon.type.name)
+
             return {
-                id: pokemonId,
                 name: pokemon.name,
                 image: pokemonImage,
-                hp: pokemonStats[0].base_stat,
                 attack: pokemonStats[1].base_stat,
-                defense: pokemonStats[2].base_stat,
-                speed: pokemonStats[5].base_stat,
-                weight: pokemonWeight,
-                height: pokemonHeight,
-                type: reconTypes(filteredTypes)
-            };
-        });
+                type: reconTypes(filteredTypes),
+                id: pokemonId
+        }})
         Promise.all(filteredPokemons)
-        .then(pokemonsapi => res.send([...pokemonsapi, ...pokemonsDb])); //concateno los pokemons de la db y la api
-    })
-       } catch (error) {
-           next(error)
-       }
+        .then(response => res.send([...response, ...filteredDbPokemons]))
+         //concateno los pokemons de la db y la api
+        }  catch {
+            res.send('There was a problem, try again later')
+        }  
+       
    }
 })
 
-router.get('/:id',  (req, res, next) => {
+router.get('/:id',  async (req, res, next) => {
     const {id} = req.params
-    
-        let pokemonDb = Pokemons.findByPk(id)
-        .then(response => {
-            if (response){
-               return res.send({
-                    name: response.dataValues.name,
-                    hp: response.dataValues.hp,
-                    attack: response.dataValues.attack,
-                    defense: response.dataValues.defense,
-                    speed: response.dataValues.speed,
-                    weight: response.dataValues.weight,
-                    height: response.dataValues.height,
-                    id: response.dataValues.id,
-                    type: response.dataValues.type
-                })
-            }
-                         }
-        )
-        let pokemonApi = axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`)
-        .then(response => {
-            const data = response.data
+    try {
+        if (id.length < 10) {
+            let pokemonApi = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`)
+            const data = pokemonApi.data
             let pokemonImage = data.sprites.other['official-artwork'].front_default
             let pokemonStats = data.stats;
-            let filteredTypes = response.data.types.map(pokemon => pokemon.type.name)
-    
+            let filteredTypes = data.types.map(pokemon => pokemon.type.name)
             return res.send(
                 {
                     name: data.name,
@@ -162,19 +153,41 @@ router.get('/:id',  (req, res, next) => {
         
                 }
            ) 
-        })
-    
-        .catch(error => {
-            next(error)
-        })        
+        }
+            let pokemonDb = await Pokemons.findAll({
+                where: {
+                    id: id
+                },
+                include: Types
+            })
+        
+            const values = pokemonDb[0].dataValues
+         const newTypes = typeArray(values.types)
+         console.log(newTypes)
+                if (pokemonDb.length > 0){
+                   return res.send({
+                        name: values.name,
+                        hp: values.hp,
+                        attack: values.attack,
+                        defense: values.defense,
+                        speed: values.speed,
+                        weight: values.weight,
+                        height: values.height,
+                        id: values.id,
+                        type: reconTypes(newTypes)
+                    })
+                } 
+        
+    } catch (error) {
+        res.status(404).send('Pokemon not found.')
+    }
 });
-router.put('/', (req, res, next) => {
-    const type = req.query.type
-    console.log(req.query)
-    
+router.put('/', async (req, res, next) => {
+    const type = req.query.type 
     try {
         if (req.query.filter && req.query.sort) {
             if (req.query.filter === 'attack') {
+                
                 let pokemons = req.body
                 pokemons.sort(function (a, b) {
                     if (a.attack > b.attack) {
@@ -215,7 +228,7 @@ router.put('/', (req, res, next) => {
             else res.status(404).send(' no se encontro ese pokemon')
         }
         // if (sort)
-    
+       
     } catch (error) {
         next(error)
     }
@@ -243,7 +256,6 @@ router.post('/', async (req, res, next) => {
             speed,
             weight,
             height,
-            type: typesToString(type, type2),
             image: image
         })
         if (type2) {

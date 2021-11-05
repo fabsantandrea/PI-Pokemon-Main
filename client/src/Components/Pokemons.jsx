@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux"
-
+import Pokeball from "./Pokeball"
 import { useState } from "react"
 import PokemonCard from "./PokemonCard"
 import CardContainer from "../Styles/CardContainer"
@@ -14,7 +14,7 @@ export default function Pokemons () {
    setCurrentPage(pageNumber)
    }
 
-
+console.log(pokemons)
 
  const indexOfLastPokemon = currentPage * pokemonsPerPage
  const indexOfFirstPokemon = indexOfLastPokemon - pokemonsPerPage
@@ -23,13 +23,14 @@ export default function Pokemons () {
       
     <Pagination pokemonsPerPage= {pokemonsPerPage} totalPokemons= {pokemons.length} paginate={paginate}/>
           <CardContainer>
-            {
+            { 
              currentPage === 1 ? pokemons.slice(0,9).map(pokemon => (
-              <Link to={`/pokemon/${pokemon.name}`} key={pokemon.id}>
-                <PokemonCard name={pokemon.name.toLowerCase()} image={pokemon.image} type= {pokemon.type}/></Link>
+              <Link to={`/pokemon/${pokemon.name}`} key={pokemon.id} style={{textDecoration: 'none'}}>
+                <PokemonCard name={pokemon.name.toLowerCase()} image={pokemon.image} type= {pokemon.type}/> <br></br></Link>
                 )) : currentPokemons.map(pokemon => (
-                  <Link to={`/pokemon/${pokemon.name}`}>
-                <PokemonCard  name={pokemon.name.toLowerCase()} image={pokemon.image} type= {pokemon.type}/> </Link>
+                  <Link to={`/pokemon/${pokemon.name}`} style={{textDecoration: 'none'}}>
+                <PokemonCard  name={pokemon.name.toLowerCase()} image={pokemon.image} type= {pokemon.type}/>  <br></br></Link>
+                
                 ))}
           </CardContainer>
     

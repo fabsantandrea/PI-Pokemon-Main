@@ -10,7 +10,6 @@ router.use(express.json())
 // Ejemplo: router.use('/auth', authRouter);
 let typeId = 1
 
-
 router.get('/', async (req, res, next) => {
     const dbTypes = await Types.findAll()
     if (dbTypes.length === 0) {

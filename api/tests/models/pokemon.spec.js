@@ -1,4 +1,4 @@
-const { Pokemon, conn } = require('../../src/db.js');
+const { Pokemons, Types, conn } = require('../../src/db.js');
 const { expect } = require('chai');
 
 describe('Pokemon model', () => {
@@ -7,16 +7,26 @@ describe('Pokemon model', () => {
       console.error('Unable to connect to the database:', err);
     }));
   describe('Validators', () => {
-    beforeEach(() => Pokemon.sync({ force: true }));
+    beforeEach(() => Pokemons.sync({ force: true }));
     describe('name', () => {
       it('should throw an error if name is null', (done) => {
-        Pokemon.create({})
+        Pokemons.create({})
           .then(() => done(new Error('It requires a valid name')))
           .catch(() => done());
       });
+      it('should throw an error if name type is not a string', (done) => {
+        Pokemons.create({name: 1})
+          .then(() => done())
+          .catch(() => done(new Error('Name input can only be a string')));
+      });
       it('should work when its a valid name', () => {
-        Pokemon.create({ name: 'Pikachu' });
+        Pokemons.create({ name: 'Pikachu' });
       });
     });
+    describe('type', () => {
+      it('should work when is a valid type', () => {
+        Types.create({type: 'Classy'});
+      })
+    })
   });
 });

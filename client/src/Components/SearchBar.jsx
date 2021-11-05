@@ -2,6 +2,12 @@ import { useState } from "react"
 import { useDispatch} from "react-redux"
 
 import { getPokemonById, getPokemonByQuery } from "../Actions"
+
+
+function hasNumber(string) {
+    return /\d/.test(string);
+  }
+
 export default function SearchBar() {
     const [pokemon, setPokemon] = useState({
     })
@@ -15,10 +21,11 @@ export default function SearchBar() {
     let handleSubmit = (e) => {
         e.preventDefault()
         if (pokemon.name) {
-            if (Number.isInteger(parseInt(pokemon.name) || pokemon.name.length > 25)) {
+            if (hasNumber(pokemon.name)){
                 dispatch(getPokemonById(pokemon.name))
-            } else if (pokemon.name.length >= 1 && pokemon.name.length < 20){
-                dispatch(getPokemonByQuery(pokemon.name.toLowerCase()))}
+            } else {
+                dispatch(getPokemonByQuery(pokemon.name))
+            }
             
         }
    

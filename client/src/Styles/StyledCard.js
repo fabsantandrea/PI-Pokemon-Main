@@ -1,13 +1,16 @@
 import styled from "styled-components";
 
 const StyledCard = styled.div`
-    height: 250px;
-    width: 200px;
-    border-width:1px;
-    border-style: solid;
-    border-color:black;
-    border-radius: 20px;
-    
+    background: #1f5f96;
+    height: 200px;
+    width: 250px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction:column;
+    justify-content: space-around;
+    &:hover{
+    opacity: 90%;
+}
 `
 
 export default StyledCard

@@ -8,11 +8,13 @@ import CreateCharacter from './Components/CreateCharacter';
 import BackgroundColor from './Styles/BackgroundColor';
 import PokemonDetail from './Components/PokemonDetail';
 import { useSelector } from 'react-redux';
+import { GlobalStyle } from './Styles/GlobalStyle';
 function App() {
   const pokemons = useSelector(state => state.filteredPokemons)
 
   return (
     <div className="App">
+      <GlobalStyle />
     <BackgroundColor>
     <Route exact path = '/' component={LandingPage}/>
     <Route path = '/' component={Header}/>
