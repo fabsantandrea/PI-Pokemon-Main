@@ -4,9 +4,10 @@ import SearchBar from "./SearchBar"
 import { NavLink } from "react-router-dom"
 import { deleteQuery} from "../Actions"
 import { useDispatch } from "react-redux"
-
+import Button from "../Styles/NavBar/Button"
 import FilterByDbAndApi from "./FilterByDbAndApi"
 import TypeFilter from "./TypeFilter"
+import { StyledNav } from "../Styles/NavBar/NavBar"
 
 export default function NavBar () {
     const dispatch = useDispatch()
@@ -15,18 +16,20 @@ export default function NavBar () {
         dispatch(deleteQuery())
         
     }
-    return <nav style={{background: '#b5463c', borderRadius: '1px', height:'100px'}}>
-        <h1>Soy el NavBar</h1>
-        <div>
-            <NavLink to='/home'><button onClick={handleClick}>All Pokemons</button> </NavLink>
-            <NavLink to= '/createcharacter'><button>Create Pokemon</button></NavLink>
-            <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'flex-end'}}>
-            <FilterByDbAndApi/>
-            <SearchBar />
+    return <StyledNav >
+        {/* <img 
+        src='https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/2560px-International_Pok%C3%A9mon_logo.svg.png'
+        style = {{width:'150px', paddingTop:'100px', paddingLeft:'50px'}}
+        /> */}
+        <NavLink to= '/createcharacter'><Button>Create Pokemon</Button></NavLink>
+        <br/>
+        <SearchBar />
+        <br/>
+        <div style={{display: 'flex', alignSelf:'center'}}>
+        <FilterByDbAndApi/>
+        <NavLink to='/home'><Button onClick={handleClick}>All Pokemons</Button> </NavLink>
         <Filters />
         <TypeFilter />
-            </div>
-        
         </div>
-        </nav>
+        </StyledNav>
 }

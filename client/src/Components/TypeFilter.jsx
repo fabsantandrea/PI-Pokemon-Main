@@ -1,6 +1,7 @@
 import { useEffect} from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { getTypes, sortByType } from "../Actions"
+import { SelectBox } from "../Styles/NavBar/SelectBox"
 let state = {}
 export default function TypeFilter () {
     const pokemons = useSelector(state => state.pokemons)
@@ -15,11 +16,11 @@ export default function TypeFilter () {
    
     return <div>
         
-        <select name= 'type' onChange={handleChange}>
+        <SelectBox name= 'type' onChange={handleChange}>
             <option>Type:</option>
             {types.map(type => (
                 <option key={type.id} value={type.name}>{type.name}</option>
             ))}
-            </select>
+            </SelectBox>
     </div>
 }

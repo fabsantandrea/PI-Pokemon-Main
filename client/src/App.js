@@ -3,7 +3,6 @@ import Home from './Components/Home';
 import {Route} from 'react-router-dom';
 import LandingPage from './Components/LandingPage';
 import NavBar from './Components/NavBar';
-import Header from './Components/Header';
 import CreateCharacter from './Components/CreateCharacter';
 import BackgroundColor from './Styles/BackgroundColor';
 import PokemonDetail from './Components/PokemonDetail';
@@ -17,9 +16,9 @@ function App() {
       <GlobalStyle />
     <BackgroundColor>
     <Route exact path = '/' component={LandingPage}/>
-    <Route path = '/' component={Header}/>
     <Route path = '/home' component={NavBar}/>
-    <Route exact path = '/Home' component={Home}/>
+    <br></br>
+    <Route exact path = '/home' component={Home}/>
     <Route exact path = '/createcharacter' component={CreateCharacter}/>
     <Route exact path = '/pokemon/:name'
       render = {({match}) => {

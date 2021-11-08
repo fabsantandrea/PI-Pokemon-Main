@@ -2,15 +2,19 @@ import { createGlobalStyle } from "styled-components"
 
 export const GlobalStyle = createGlobalStyle`
     h1{
-        font-family: 'Courier New', Courier, monospace;
+        font-family: fantasy;
         color: #2d2d2d
     };
     h2{
-        font-family: 'Courier New', Courier, monospace;
+        font-family: fantasy;
         color: #2d2d2d
     };
     h3{
-        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-family: fantasy;
         color: #2d2d2d
     };
+    span{
+        font-family: fantasy;
+        color: #2d2d2d
+    }
 `

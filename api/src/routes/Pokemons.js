@@ -93,13 +93,14 @@ router.get('/', async (req, res, next) => { //ESTO ES PARA EL QUERY
             let pokemonsPromiseDb = await Pokemons.findAll({
                 include: Types
             });
+            console.log(pokemonsPromiseDb)
             let filteredDbPokemons = pokemonsPromiseDb.map(pokemon => {
                 return {
                     name: pokemon.name,
                     image: pokemon.image,
                     id: pokemon.id,
                     attack: pokemon.attack,
-                    type: reconTypes(typeArray(pokemonsPromiseDb[0].types))
+                    type: reconTypes(typeArray(pokemon.types))
                 }
             })
   

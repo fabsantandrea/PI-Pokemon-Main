@@ -1,13 +1,14 @@
-
+import { NavLink } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
-import { sortByName, sortByAttack } from "../Actions"
-
-
+import { sortByName, sortByAttack, deleteQuery } from "../Actions"
+import { SelectBox, Option } from '../Styles/NavBar/SelectBox'
+import Button from '../Styles/NavBar/Button'
 let state = {}
 export default function Filters() {
     const pokemons = useSelector(state => state.filteredPokemons)
     const dispatch = useDispatch()
-    
+
+
     const handleChange = (e) => {
         //  setFilter({
         //     ...filter,
@@ -37,16 +38,18 @@ export default function Filters() {
         
     }
 
-    return <div>
-        <select name= 'sort' onChange={handleChange} >
-        <option >Asc-Desc</option>
-            <option value= 'desc'>Descendente</option>
-            <option value= 'asc'>Ascendente</option>
-        </select>
-        <select name= 'filter' onChange={handleChange}>
-            <option>Sort by:</option>
-            <option value= 'name'>Name</option>   
-            <option value= 'attack'>Attack</option> 
-        </select>
+    return <div style={{justifySelf:'flex-end'}}>
+       
+        <SelectBox name= 'sort' onChange={handleChange} >
+        <Option >Asc-Desc</Option>
+            <Option value= 'desc'>Descendente</Option>
+            <Option value= 'asc'>Ascendente</Option>
+        </SelectBox>
+        
+        <SelectBox name= 'filter' onChange={handleChange}>
+            <Option>Sort by:</Option>
+            <Option value= 'name'>Name</Option>   
+            <Option value= 'attack'>Attack</Option> 
+        </SelectBox>
     </div>
 }

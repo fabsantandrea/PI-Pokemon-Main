@@ -7,17 +7,21 @@ String.prototype.capitalizeFirstLetter = function () {
   }
 
 export default function PokemonCard({name,image, type}) {
-    
+    let types = type.split(', ')
+    console.log(types)
     return <StyledCard>
-         <div style={{height:'20%', borderRadius: '15px',display:'flex', flexDirection:'column', alignContent:'flex-start', justifyContent:'center'}}>
-           <h1 > {name.capitalizeFirstLetter()}</h1>
+         <div style={{display:'flex', flexDirection:'column', justifyContent:'center'}}>
+         <img src={image} alt= 'imagen' style={{maxHeight: '90px', maxWidth: '100px', borderRadius:'10px'}}/>
         </div>
       
-        <div style={{background:'#1f5f96'}}>
-           <img src={image} alt= 'imagen' style={{maxHeight: '100px', maxWidth: '100px'}}/>
-           </div>
-           <div style={{background: '#ebbf7c',height:'20%', borderRadius: '15px',display:'flex', flexDirection:'column', alignContent:'flex-start', justifyContent:'center'}}>
-            <h3>{type}</h3>
+        <div >
+           
+           <h2> {name.capitalizeFirstLetter()}</h2>
+           <div>
+            <span>{types[0].capitalizeFirstLetter()}</span>
+            <br />
+            {types[1] ? <span>{types[1].capitalizeFirstLetter()}</span>: console.log('hola')}
             </div>
+        </div>
     </StyledCard>
 }

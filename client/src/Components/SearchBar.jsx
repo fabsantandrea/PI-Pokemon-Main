@@ -2,7 +2,7 @@ import { useState } from "react"
 import { useDispatch} from "react-redux"
 
 import { getPokemonById, getPokemonByQuery } from "../Actions"
-
+import Input from "../Styles/NavBar/Input";
 
 function hasNumber(string) {
     return /\d/.test(string);
@@ -32,8 +32,7 @@ export default function SearchBar() {
     }
     return <div>   
         <form onSubmit= {handleSubmit}>
-        <input name= 'name' placeholder='Insert name or ID' onChange= {handleChange}></input>
-        <button >Search</button>
+        <Input name= 'name' placeholder='Insert name or ID' onChange= {handleChange}></Input>
         </form>    
     </div>
 }

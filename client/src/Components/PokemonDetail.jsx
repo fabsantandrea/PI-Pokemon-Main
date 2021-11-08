@@ -1,10 +1,12 @@
 import { useEffect } from "react"
 import { Link } from "react-router-dom"
-import { deleteQuery, getPokemonByQuery } from "../Actions"
+import { deleteQuery, getPokemonByQuery, getPokemons } from "../Actions"
 import { PokemonStyle } from "../Styles/PokemonStyle"
 import PokemonDetailCard from "./PokemonDetailCard"
-import { useDispatch} from "react-redux"
+import { useDispatch, useSelector} from "react-redux"
+
 export default function PokemonDetail ({pokemon}) {
+
     const dispatch = useDispatch()
     useEffect(() => dispatch(getPokemonByQuery(pokemon.name)), [])
     const handleClick = () => dispatch(deleteQuery());
