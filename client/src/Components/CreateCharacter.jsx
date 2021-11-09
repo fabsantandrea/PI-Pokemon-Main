@@ -7,6 +7,7 @@ import  Input  from "../Styles/NavBar/Input"
 import  Button  from "../Styles/NavBar/Button"
 import { SelectBox, Option } from "../Styles/NavBar/SelectBox"
 import FormContainer from "../Styles/Create Character/Form Container"
+import {useHistory} from "react-router"
 const ErrorSpan = styled.span`
     color: #b5463c;
     font-family: fantasy;
@@ -54,6 +55,7 @@ let selectTypes = {
     type2: ''
 }
 export default function CreateCharacter () {
+    const history = useHistory()
     const pokemonList = useSelector(state => state.pokemons)
     const[pokemon, setPokemon] = useState({
         name: '',
@@ -93,6 +95,7 @@ export default function CreateCharacter () {
         dispatch(createPokemon({pokemon, selectTypes}))
         alert('Se creó el Pokemon')
         dispatch(getPokemons())
+        history.push('/home')
         }
          
     }
