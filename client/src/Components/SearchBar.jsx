@@ -4,9 +4,18 @@ import { useDispatch} from "react-redux"
 import { deleteQuery, getPokemonById, getPokemonByQuery } from "../Actions"
 import Input from "../Styles/NavBar/Input";
 
+let message = {
+
+}
 function hasNumber(string) {
     return /\d/.test(string);
   }
+
+  function checkSpaces(str) {
+    if (str === undefined) return true
+    if (!str.replace(/\s/g, "").length) return true
+    return false
+   }
 
 export default function SearchBar() {
     const [pokemon, setPokemon] = useState({
@@ -20,7 +29,7 @@ export default function SearchBar() {
     }
     let handleSubmit = (e) => {
         e.preventDefault()
-        if (pokemon.name) {
+        if (pokemon.name && !checkSpaces(pokemon.name)) {
             if (hasNumber(pokemon.name)){
                 dispatch(getPokemonById(pokemon.name))
             } else {
@@ -28,13 +37,14 @@ export default function SearchBar() {
             }
             
         } else {
-            dispatch(deleteQuery())
+            message.error = 'Pokemon not found'
         }
    
     }
     return <div>   
         <form onSubmit= {handleSubmit}>
-        <Input name= 'name' placeholder='Insert name or ID' onChange= {handleChange}></Input>
-        </form>    
+        <Input name= 'name' placeholder='Insert name or ID' onChange= {handleChange} ></Input>
+        
+        </form>
     </div>
 }

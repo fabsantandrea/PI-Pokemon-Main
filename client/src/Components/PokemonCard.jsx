@@ -7,8 +7,10 @@ String.prototype.capitalizeFirstLetter = function () {
 };
 
 export default function PokemonCard({ name, image, type }) {
-  let types = type.split(", ");
-  console.log(types);
+
+    var types = type.split(", ")
+
+
   return (
     <StyledCard>
       <div

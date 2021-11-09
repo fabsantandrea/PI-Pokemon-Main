@@ -20,7 +20,7 @@ describe('Pokemon model', () => {
           .catch(() => done(new Error('Name input can only be a string')));
       });
       it('should work when its a valid name', () => {
-        Pokemons.create({ name: 'Pikachu' });
+        Pokemons.create({ name: 'Mario'});
       });
     });
     describe('type', () => {

@@ -27,7 +27,6 @@ function App() {
     <Route exact path = '/pokemon/:name'
       render = {({match}) => {
         const pokemonMatch = pokemons.find(pokemon => pokemon.name === match.params.name);
-        console.log(pokemonMatch)
           return <PokemonDetail pokemon= {pokemonMatch} match = {match}/>
           }
       }
