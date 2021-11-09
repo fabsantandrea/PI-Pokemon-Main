@@ -16,7 +16,7 @@ export default function TypeFilter () {
    
     return <div>
         
-        <SelectBox name= 'type' onChange={handleChange}>
+        <SelectBox  style={{background:'#89B5AF'}} name= 'type' onChange={handleChange}>
             <option>Type:</option>
             {types.map(type => (
                 <option key={type.id} value={type.name}>{type.name}</option>

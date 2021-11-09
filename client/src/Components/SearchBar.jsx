@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useDispatch} from "react-redux"
 
-import { getPokemonById, getPokemonByQuery } from "../Actions"
+import { deleteQuery, getPokemonById, getPokemonByQuery } from "../Actions"
 import Input from "../Styles/NavBar/Input";
 
 function hasNumber(string) {
@@ -24,9 +24,11 @@ export default function SearchBar() {
             if (hasNumber(pokemon.name)){
                 dispatch(getPokemonById(pokemon.name))
             } else {
-                dispatch(getPokemonByQuery(pokemon.name))
+                dispatch(getPokemonByQuery(pokemon.name.trim()))
             }
             
+        } else {
+            dispatch(deleteQuery())
         }
    
     }

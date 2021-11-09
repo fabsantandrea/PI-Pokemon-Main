@@ -21,13 +21,13 @@ export default function NavBar () {
         src='https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/2560px-International_Pok%C3%A9mon_logo.svg.png'
         style = {{width:'150px', paddingTop:'100px', paddingLeft:'50px'}}
         /> */}
-        <NavLink to= '/createcharacter'><Button>Create Pokemon</Button></NavLink>
+        <NavLink to= '/createcharacter'><Button style={{height:'40px', width:'300px'}}>Create Pokemon</Button></NavLink>
         <br/>
         <SearchBar />
         <br/>
         <div style={{display: 'flex', alignSelf:'center'}}>
         <FilterByDbAndApi/>
-        <NavLink to='/home'><Button onClick={handleClick}>All Pokemons</Button> </NavLink>
+        <NavLink to='/home'><Button style={{width:'200px', border:'2px solid'}} onClick={handleClick}>All Pokemons</Button> </NavLink>
         <Filters />
         <TypeFilter />
         </div>

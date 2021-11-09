@@ -7,8 +7,8 @@ export const SelectBox = styled.select`
     -webkit-padding-start: 2px;
     -moz-padding-start: 2px;
     
-    background: transparent;
-    border: 1px solid #AAA;
+    background: #89B5AF;
+    border: 2px solid #AAA;
     border-color: #2d2d2d;
     border-radius: 20px;
     box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
@@ -35,7 +35,7 @@ export const Option = styled.option`
 ;
     border: 1px solid;
     border-color: #2d2d2d;
-    background: #069e9e;
+    background: #89B5AF;
     display: flex;
     min-height: 20px;
     padding: 0px 2px 1px;

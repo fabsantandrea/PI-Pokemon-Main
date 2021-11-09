@@ -1,10 +1,12 @@
+
 import styled from 'styled-components'
 
 const BackgroundColor = styled.div`
 
-background-color: #04ccab;
+background:#D3E4CD;
 width:100% ;
-min-height: 700px;
+min-height: 721px;
+
 `
 
 export default BackgroundColor

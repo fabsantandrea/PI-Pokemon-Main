@@ -1,10 +1,10 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import { shallow, mount } from "enzyme";
 import { BrowserRouter} from "react-router-dom";
 import  NavBar  from './Components/NavBar'
 import { Provider } from "react-redux";
 import store from './Store/index'
+
 describe("NavBar", () => {
   beforeEach(() => {
     render(

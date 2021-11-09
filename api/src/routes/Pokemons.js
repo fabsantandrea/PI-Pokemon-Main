@@ -165,9 +165,11 @@ router.get('/:id',  async (req, res, next) => {
             const values = pokemonDb[0].dataValues
          const newTypes = typeArray(values.types)
          console.log(newTypes)
+         console.log(values)
                 if (pokemonDb.length > 0){
                    return res.send({
                         name: values.name,
+                        image: values.image,
                         hp: values.hp,
                         attack: values.attack,
                         defense: values.defense,

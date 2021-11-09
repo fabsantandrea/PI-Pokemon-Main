@@ -24,9 +24,12 @@ describe('Pokemon model', () => {
       });
     });
     describe('type', () => {
-      it('should work when is a valid type', () => {
-        Types.create({type: 'Classy'});
+      it('should return all genres', () => {
+        Types.findAll()
+        .then((response) => done(expect(response).toHaveLength(20)))
+        .catch(() => done());
+    });
       })
     })
   });
-});
+

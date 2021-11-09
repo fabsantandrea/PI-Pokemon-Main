@@ -20,7 +20,7 @@ export default function Pokemons () {
  const indexOfLastPokemon = currentPage * pokemonsPerPage
  const indexOfFirstPokemon = indexOfLastPokemon - pokemonsPerPage
  const currentPokemons = pokemons.slice(indexOfFirstPokemon, indexOfLastPokemon)
-    return (<div>
+    return (<div style={{display:"flex", flexDirection:'column', justifyContent:'center'}}>
       
     
           <CardContainer>
@@ -31,6 +31,8 @@ export default function Pokemons () {
                 
                 ))}
           </CardContainer>
+          <br/>
+     
           <Pagination pokemonsPerPage= {pokemonsPerPage} totalPokemons= {pokemons.length} paginate={paginate}/>
          </div>)
 }

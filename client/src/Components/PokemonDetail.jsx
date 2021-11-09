@@ -4,17 +4,15 @@ import { deleteQuery, getPokemonByQuery, getPokemons } from "../Actions"
 import { PokemonStyle } from "../Styles/PokemonStyle"
 import PokemonDetailCard from "./PokemonDetailCard"
 import { useDispatch, useSelector} from "react-redux"
-
+import Button from '../Styles/NavBar/Button'
 export default function PokemonDetail ({pokemon}) {
-
     const dispatch = useDispatch()
     useEffect(() => dispatch(getPokemonByQuery(pokemon.name)), [])
+    
     const handleClick = () => dispatch(deleteQuery());
-    return <div style={{display:"flex", height: '900px', flexDirection:'column'}}>
-        <PokemonStyle>
-        <Link to='/home'> 
-        <button onClick={handleClick}>Back</button>
-        </Link>
+
+    return  <div style={{display:'flex', flexDirection:'column'}}>
+         <PokemonStyle>   
         <PokemonDetailCard 
         attack={pokemon.attack}
         hp={pokemon.hp}
@@ -28,6 +26,11 @@ export default function PokemonDetail ({pokemon}) {
         id={pokemon.id}
         
         />
+        
         </PokemonStyle>
-    </div>
+        <br/>
+        <Link to='/home'> 
+        <Button style={{width:'200px'}} onClick={handleClick}>Back</Button>
+        </Link>
+        </div>
 }

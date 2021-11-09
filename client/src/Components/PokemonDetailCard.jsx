@@ -9,18 +9,12 @@ String.prototype.capitalizeFirstLetter = function () {
 
 export default function PokemonDetailCard({name,image,type, attack, hp, defense, speed, weight, height, id}) {
     
-    return <div>
-     
-     {/* <img src={pokedex} style={{width:'60%'}} ></img> */}
+    return <div style={{display:'flex', flexDirection:'row', justifyContent:'space-evenly'}} >
+      <div>
+           <img src={image} alt= 'imagen' style={{maxHeight: '1000px', maxWidth: '1000px'}}/>
+        </div>
          <div>
-           <h1>{name.capitalizeFirstLetter()}</h1>
-        </div>
-        <div>
-           <img src={image} alt= 'imagen' style={{maxHeight: '100px', maxWidth: '100px'}}/>
-        </div>
-        <div>
-            <h3>{type}</h3>
-        </div>
+         <h1>{name.capitalizeFirstLetter()}</h1>
         <span>HP: {hp}</span>
         <div><span>Attack: {attack}</span></div>
         <div><span>Defense:{defense}</span></div>
@@ -28,6 +22,10 @@ export default function PokemonDetailCard({name,image,type, attack, hp, defense,
         <div><span>Weight:{weight}</span></div>
         <div><span>Height:{height}</span></div>
         <div><span>ID:{id}</span></div>
+        <h3>{type}</h3>
+        </div>
+        
+        
         
           </div>
 }

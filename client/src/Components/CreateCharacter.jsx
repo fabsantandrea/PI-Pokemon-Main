@@ -75,7 +75,6 @@ export default function CreateCharacter () {
             ...pokemon,
             [e.target.name]: e.target.value
         }
-        
     return state
     }) }
     let handleType = (e) => {
@@ -109,37 +108,31 @@ export default function CreateCharacter () {
             <h1>CREATE YOUR OWN POKEMON</h1>
             <br />
         <form >
-            <label>Name</label>
-            <Input name= 'name' onChange= {handleChange} style={errors.name && {borderColor: '#b5463c'}}></Input>
-            <ErrorSpan>{errors.name}</ErrorSpan>
+            <span>Name: </span>
+            <Input name= 'name' onChange= {handleChange} style={errors.name && {borderColor: '#b5463c'}}
+            placeholder= {errors.name}></Input>
             <p></p>
-            <label>Image (URL)</label>
-            <Input name= 'image' onChange= {handleChange} style={errors.image && {borderColor: '#b5463c'}}></Input>
-            <ErrorSpan>{errors.image}</ErrorSpan>
+            <span>Image(URL):</span>
+            <Input name= 'image' onChange= {handleChange} style={errors.image && {borderColor: '#b5463c'}} placeholder= {errors.image}></Input>
             <p></p>
-            <label>HP</label>
-            <Input name= 'hp' onChange= {handleChange} style={errors.hp && {borderColor: '#b5463c'}}></Input>
-            <ErrorSpan>{errors.hp}</ErrorSpan>
+            <span>HP:</span>
+            <Input name= 'hp' onChange= {handleChange} style={errors.hp && {borderColor: '#b5463c'}} placeholder= {errors.hp}></Input>
+
             <p></p>
-            <label>Speed</label>
-            <Input name= 'speed' onChange= {handleChange} style={errors.speed && {borderColor: '#b5463c'}}></Input>
-            <ErrorSpan>{errors.speed}</ErrorSpan>
+            <span>Speed:</span>
+            <Input name= 'speed' onChange= {handleChange} style={errors.speed && {borderColor: '#b5463c'}} placeholder= {errors.speed}></Input>
             <p></p>
-            <label>Attack</label>
-            <Input name= 'attack' onChange= {handleChange} style={errors.attack && {borderColor: '#b5463c'}}></Input>
-            <ErrorSpan>{errors.attack}</ErrorSpan>
+            <span>Attack:</span>
+            <Input name= 'attack' onChange= {handleChange} style={errors.attack && {borderColor: '#b5463c'}} placeholder= {errors.attack}></Input>
             <p></p>
-            <label>Defense</label>
-            <Input name= 'defense' onChange= {handleChange} style={errors.defense && {borderColor: '#b5463c'}}></Input>
-            <ErrorSpan>{errors.defense}</ErrorSpan>
+            <span>Defense:</span>
+            <Input name= 'defense' onChange= {handleChange} style={errors.defense && {borderColor: '#b5463c'}} placeholder= {errors.defense}></Input>
             <p></p>
-            <label>Height</label>
-            <Input name= 'height' onChange= {handleChange} style={errors.height && {borderColor: '#b5463c'}}></Input>
-            <ErrorSpan>{errors.height}</ErrorSpan>
+            <span>Height:</span>
+            <Input name= 'height' onChange= {handleChange} style={errors.height && {borderColor: '#b5463c'}} placeholder= {errors.height}></Input>
             <p></p>
-            <label>Weight</label>
-            <Input name= 'weight' onChange= {handleChange} style={errors.weight && {borderColor: '#b5463c'}}></Input>
-            <ErrorSpan>{errors.weight}</ErrorSpan>
+            <span>Weight:</span>
+            <Input name= 'weight' onChange= {handleChange} style={errors.weight && {borderColor: '#b5463c'}} placeholder= {errors.weight}></Input>
             <br/>
             <br/>
             <br/>

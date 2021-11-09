@@ -1,11 +1,15 @@
 import styled from "styled-components"
-import pokedex from "../Storage/Pokedex.png"
-export const PokemonStyle = styled.div`
-    background: url(${pokedex});
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-origin: content-box;
-    height: 700px;
-    display:flex;
-    justify-content: flex-start;
+
+
+export const PokemonStyle = styled.div` 
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    background: #89B5AF;
+    height: 600px;
+    width: 800px;
+    align-self: center;
+    border: 2px solid;
+    border-radius: 100px;
+    justify-content: center;
 `

@@ -1,16 +1,17 @@
 import styled from "styled-components";
 
 const StyledCard = styled.div`
-    background: #069e9e;
+    background: white;
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    height: 150px;
+    height: 125px;
     width: 250px;
     border-radius: 15px;
     display: flex;
-    justify-content: space-evenly;
+    box-shadow: 1px 1px 1px 1px #2d2d2d;
     &:hover{
     opacity: 90%;
+   
 }
 `
 
