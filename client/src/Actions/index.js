@@ -6,7 +6,7 @@ import axios from 'axios'
 
 export function getPokemons() {
     return function (dispatch) {
-        axios.get('http://localhost:3001/pokemons')
+        axios.get('/pokemons')
         .then(pokemons => {
             dispatch({
                 type: GET_POKEMONS,
@@ -18,7 +18,7 @@ export function getPokemons() {
 export function sortBySpeed (param) {
     console.log(param)
     return function(dispatch) {
-        axios.put('http://localhost:3001/pokemons?filterBySpeed=' + param.state.filterBySpeed, param.pokemons)
+        axios.put('/pokemons?filterBySpeed=' + param.state.filterBySpeed, param.pokemons)
         .then(pokemons => {
             console.log(pokemons, 'SOY POKEMONS')
             dispatch({
@@ -31,7 +31,7 @@ export function sortBySpeed (param) {
 
 export function getPokemonByQuery(name) {
     return function (dispatch) {
-        axios.get('http://localhost:3001/pokemons/?name=' + name)
+        axios.get('/pokemons/?name=' + name)
         .then(pokemons => {
             console.log(pokemons)
             dispatch({
@@ -43,7 +43,7 @@ export function getPokemonByQuery(name) {
 }
 export function getPokemonById(id) {
     return function (dispatch) {
-        axios.get('http://localhost:3001/pokemons/' + id)
+        axios.get('/pokemons/' + id)
         .then(pokemons => {
             console.log(pokemons)
             dispatch({
@@ -56,7 +56,7 @@ export function getPokemonById(id) {
 
 export function sortByAttack(param) {
     return function (dispatch) {
-        axios.put('http://localhost:3001/pokemons/?sort=' + param.state.sort + '&filter=' + param.state.filter, param.pokemons)
+        axios.put('/pokemons/?sort=' + param.state.sort + '&filter=' + param.state.filter, param.pokemons)
         .then(sortedPokemons => {
             dispatch({
                 type: SORT_BY_ATTACK,
@@ -68,7 +68,7 @@ export function sortByAttack(param) {
 export function sortByType(param) {
     console.log(param)
     return function (dispatch) {
-        axios.put('http://localhost:3001/pokemons/?type=' + param.state.type, param.pokemons)
+        axios.put('/pokemons/?type=' + param.state.type, param.pokemons)
         .then(sortedPokemons => {
             dispatch({
                 type: SORT_BY_TYPE,
@@ -80,7 +80,7 @@ export function sortByType(param) {
 export function createPokemon(data) {
    
     return function (dispatch) {
-        axios.post('http://localhost:3001/pokemons/', data)
+        axios.post('/pokemons/', data)
         .then((pokemon) => dispatch({
             type: CREATE_POKEMON,
             payload: pokemon
@@ -96,7 +96,7 @@ export function sortByName(param) {
 //        payload: {sort, filter}
 //     }
 return function (dispatch) {
-    axios.put('http://localhost:3001/pokemons/?sort=' + param.state.sort + '&filter=' + param.state.filter, param.pokemons)
+    axios.put('/pokemons/?sort=' + param.state.sort + '&filter=' + param.state.filter, param.pokemons)
     .then(sortedPokemons => {
         dispatch({
             type: SORT_BY_NAME,
@@ -130,7 +130,7 @@ export function deleteSortByType() {
 
 export function getTypes() {
     return function (dispatch) {
-        axios.get('http://localhost:3001/types')
+        axios.get('/types')
         .then(types => {
             dispatch({
                 type: GET_TYPES,
