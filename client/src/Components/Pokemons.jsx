@@ -28,7 +28,7 @@ export default function Pokemons () {
             currentPokemons.map(pokemon => (
                   <Link to={`/pokemon/${pokemon.name}`} style={{textDecoration: 'none'}}>
                 <PokemonCard  name={pokemon.name.toLowerCase()} image={pokemon.image} type= {pokemon.type}/>  <br></br></Link>
-                
+               
                 ))}
           </CardContainer>
           <br/>

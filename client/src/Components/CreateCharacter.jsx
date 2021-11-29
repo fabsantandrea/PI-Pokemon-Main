@@ -28,7 +28,7 @@ String.prototype.capitalizeFirstLetter = function () {
 //     }
  
 // }
-
+const message = 'Must be a number'
 const validate =(data, pokemons) => {
     let inputs = Object.keys(data)
     const errors = {}
@@ -119,23 +119,23 @@ export default function CreateCharacter () {
             <Input name= 'image' onChange= {handleChange} style={errors.image && {borderColor: '#b5463c'}} placeholder= {errors.image}></Input>
             <p></p>
             <span>HP:</span>
-            <Input name= 'hp' onChange= {handleChange} style={errors.hp && {borderColor: '#b5463c'}} placeholder= {errors.hp}></Input>
+            <Input name= 'hp' onChange= {handleChange} style={errors.hp && {borderColor: '#b5463c'}} placeholder= {errors.hp || message}></Input>
 
             <p></p>
             <span>Speed:</span>
-            <Input name= 'speed' onChange= {handleChange} style={errors.speed && {borderColor: '#b5463c'}} placeholder= {errors.speed}></Input>
+            <Input name= 'speed' onChange= {handleChange} style={errors.speed && {borderColor: '#b5463c'}} placeholder= {errors.speed || message}></Input>
             <p></p>
             <span>Attack:</span>
-            <Input name= 'attack' onChange= {handleChange} style={errors.attack && {borderColor: '#b5463c'}} placeholder= {errors.attack}></Input>
+            <Input name= 'attack' onChange= {handleChange} style={errors.attack && {borderColor: '#b5463c'}} placeholder= {errors.attack || message}></Input>
             <p></p>
             <span>Defense:</span>
-            <Input name= 'defense' onChange= {handleChange} style={errors.defense && {borderColor: '#b5463c'}} placeholder= {errors.defense}></Input>
+            <Input name= 'defense' onChange= {handleChange} style={errors.defense && {borderColor: '#b5463c'}} placeholder= {errors.defense || message}></Input>
             <p></p>
             <span>Height:</span>
-            <Input name= 'height' onChange= {handleChange} style={errors.height && {borderColor: '#b5463c'}} placeholder= {errors.height}></Input>
+            <Input name= 'height' onChange= {handleChange} style={errors.height && {borderColor: '#b5463c'}} placeholder= {errors.height || message}></Input>
             <p></p>
             <span>Weight:</span>
-            <Input name= 'weight' onChange= {handleChange} style={errors.weight && {borderColor: '#b5463c'}} placeholder= {errors.weight}></Input>
+            <Input name= 'weight' onChange= {handleChange} style={errors.weight && {borderColor: '#b5463c'}} placeholder= {errors.weight || message}></Input>
             <br/>
             <br/>
             <br/>

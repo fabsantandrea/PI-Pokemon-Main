@@ -23,7 +23,6 @@ router.get('/', async (req, res, next) => {
         })
         return res.send(results)
     } else {
-        console.log('entre')
         return res.send(dbTypes)
     }
     

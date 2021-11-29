@@ -15,6 +15,19 @@ export function getPokemons() {
         })
     }
 }
+export function sortBySpeed (param) {
+    console.log(param)
+    return function(dispatch) {
+        axios.put('http://localhost:3001/pokemons?filterBySpeed=' + param.state.filterBySpeed, param.pokemons)
+        .then(pokemons => {
+            console.log(pokemons, 'SOY POKEMONS')
+            dispatch({
+                type: 'SORT_BY_SPEED',
+                payload: pokemons
+            })
+        })
+    }
+}
 
 export function getPokemonByQuery(name) {
     return function (dispatch) {

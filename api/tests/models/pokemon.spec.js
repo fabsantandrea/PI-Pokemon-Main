@@ -19,9 +19,6 @@ describe('Pokemon model', () => {
           .then(() => done())
           .catch(() => done(new Error('Name input can only be a string')));
       });
-      it('should work when its a valid name', () => {
-        Pokemons.create({ name: 'Mario'});
-      });
     });
     describe('type', () => {
       it('should return all genres', () => {

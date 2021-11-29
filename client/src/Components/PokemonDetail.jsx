@@ -1,13 +1,13 @@
 import { useEffect } from "react"
 import { Link } from "react-router-dom"
-import { deleteQuery, getPokemonByQuery, getPokemons } from "../Actions"
+import { deleteQuery, getPokemonByQuery} from "../Actions"
 import { PokemonStyle } from "../Styles/PokemonStyle"
 import PokemonDetailCard from "./PokemonDetailCard"
-import { useDispatch, useSelector} from "react-redux"
+import { useDispatch} from "react-redux"
 import Button from '../Styles/NavBar/Button'
-export default function PokemonDetail ({pokemon}) {
+export default function PokemonDetail ({pokemon, match}) {
     const dispatch = useDispatch()
-    useEffect(() => dispatch(getPokemonByQuery(pokemon.name)), [])
+    useEffect(() => dispatch(getPokemonByQuery(match.params.name)), [])
     
     const handleClick = () => dispatch(deleteQuery());
 
@@ -29,7 +29,7 @@ export default function PokemonDetail ({pokemon}) {
         
         </PokemonStyle>
         <br/>
-        <Link to='/home'> 
+        <Link to='/home' style={{width:'200px', alignSelf:'center'}}> 
         <Button style={{width:'200px'}} onClick={handleClick}>Back</Button>
         </Link>
         </div>

@@ -37,7 +37,7 @@ export default function SearchBar() {
             }
             
         } else {
-            message.error = 'Pokemon not found'
+            dispatch(deleteQuery())
         }
    
     }

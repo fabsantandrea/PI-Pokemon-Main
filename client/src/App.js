@@ -6,12 +6,15 @@ import NavBar from './Components/NavBar';
 import CreateCharacter from './Components/CreateCharacter';
 import BackgroundColor from './Styles/BackgroundColor';
 import PokemonDetail from './Components/PokemonDetail';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { GlobalStyle } from './Styles/GlobalStyle';
+import Pokeball from './Components/Pokeball';
+
 
 
 function App() {
   const pokemons = useSelector(state => state.filteredPokemons)
+
   return (
     <div className="App">
      
@@ -27,11 +30,10 @@ function App() {
     <Route exact path = '/pokemon/:name'
       render = {({match}) => {
         const pokemonMatch = pokemons.find(pokemon => pokemon.name === match.params.name);
-          return <PokemonDetail pokemon= {pokemonMatch} match = {match}/>
+          return !pokemonMatch ? <Pokeball match={match} /> : <PokemonDetail pokemon= {pokemonMatch} match = {match}/>
           }
       }
 />
-
     </BackgroundColor>
      
     </div>

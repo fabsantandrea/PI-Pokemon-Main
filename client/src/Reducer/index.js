@@ -8,6 +8,7 @@ const InitialState = {
 }
 
 function reducer (state = InitialState, action) {
+   
     switch(action.type) {
         case GET_POKEMONS : {
             return {
@@ -40,6 +41,13 @@ function reducer (state = InitialState, action) {
                 filteredPokemons: action.payload.data
             }
         }
+        case 'SORT_BY_SPEED': {
+        
+            return {
+                ...state,
+                filteredPokemons: action.payload.data
+            }
+        }
         case SORT_BY_NAME : {
                 // let sorted = state.filteredPokemons.sort(function (a, b) {
                 //     if (a.name < b.name) {
@@ -64,7 +72,7 @@ function reducer (state = InitialState, action) {
             }
         case SORT_BY_STORAGE : {
             let sortedPokemons = [...state.pokemons]
-            console.log(sortedPokemons)
+            
             if (action.payload === 'db') {
                 let sortedByDb = sortedPokemons.filter(pokemon => pokemon.id.length > 15)
                 console.log(sortedByDb)
