@@ -10,7 +10,7 @@ export default function TypeFilter () {
     const types = useSelector(state => state.types)
     const handleChange = (e) => {
         state[e.target.name] = e.target.value
-        console.log(state)
+        
         dispatch(sortByType({state, pokemons}))
     }
    

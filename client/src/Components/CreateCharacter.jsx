@@ -36,7 +36,7 @@ const validate =(data, pokemons) => {
     if (filter.length > 0) {
         errors.name = "That pokemon already exists, choose another name"
     }
-    console.log(filter, 'soy filter')
+    
     for (let i = 0; i < inputs.length; i++) {
         if (!data[inputs[i]]) {
             errors[inputs[i]] = inputs[i].capitalizeFirstLetter() + ` can't be empty`
@@ -88,8 +88,7 @@ export default function CreateCharacter () {
         const validations = validate(state, pokemonList)
         const checkErrors = Object.values(errors)
         setErrors(validations)
-        console.log(checkErrors, 'soy checkerrors')
-        console.log(validations, 'soy valitaions')
+       
         const check = Object.keys(validations)
         if(check.length === 0) {
         dispatch(createPokemon({pokemon, selectTypes}))

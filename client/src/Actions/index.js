@@ -16,11 +16,11 @@ export function getPokemons() {
     }
 }
 export function sortBySpeed (param) {
-    console.log(param)
+
     return function(dispatch) {
         axios.put('/pokemons?filterBySpeed=' + param.state.filterBySpeed, param.pokemons)
         .then(pokemons => {
-            console.log(pokemons, 'SOY POKEMONS')
+           
             dispatch({
                 type: 'SORT_BY_SPEED',
                 payload: pokemons
@@ -33,7 +33,7 @@ export function getPokemonByQuery(name) {
     return function (dispatch) {
         axios.get('/pokemons/?name=' + name)
         .then(pokemons => {
-            console.log(pokemons)
+        
             dispatch({
                 type: GET_POKEMONS_BY_QUERY,
                 payload: pokemons
@@ -45,7 +45,7 @@ export function getPokemonById(id) {
     return function (dispatch) {
         axios.get('/pokemons/' + id)
         .then(pokemons => {
-            console.log(pokemons)
+            
             dispatch({
                 type: GET_POKEMONS_BY_ID,
                 payload: pokemons
@@ -66,7 +66,7 @@ export function sortByAttack(param) {
     }
 }
 export function sortByType(param) {
-    console.log(param)
+   
     return function (dispatch) {
         axios.put('/pokemons/?type=' + param.state.type, param.pokemons)
         .then(sortedPokemons => {
@@ -106,7 +106,7 @@ return function (dispatch) {
 }
 }
 export function sortByStorage(param) {
-    console.log(param, 'soy param')
+  
     return {
        type: SORT_BY_STORAGE,
        payload: param
