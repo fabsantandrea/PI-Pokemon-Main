@@ -44,11 +44,8 @@ export default function PokemonCard({ name, image, type }) {
 
         <span>{types[0].capitalizeFirstLetter()}</span>
         <br />
-        {types[1] ? (
-          <span>{types[1].capitalizeFirstLetter()}</span>
-        ) : (
-          console.log("hola")
-        )}
+        {types[1] && <span>{types[1].capitalizeFirstLetter()}</span>
+        }
       </div>
     </StyledCard>
   );

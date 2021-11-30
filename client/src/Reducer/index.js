@@ -75,7 +75,7 @@ function reducer (state = InitialState, action) {
             
             if (action.payload === 'db') {
                 let sortedByDb = sortedPokemons.filter(pokemon => pokemon.id.length > 15)
-                console.log(sortedByDb)
+            
                 return {
                     ...state,
                     filteredPokemons: sortedByDb
