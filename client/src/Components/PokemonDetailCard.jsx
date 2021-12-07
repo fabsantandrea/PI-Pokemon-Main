@@ -14,7 +14,7 @@ export default function PokemonDetailCard({name,image,type, attack, hp, defense,
       
             <div style={{display:'flex', flexDirection:'row', justifyContent:'space-evenly'}} >
               <div>
-              <img src={image} alt= 'imagen' style={{maxHeight: '300px', borderRadius:'15px'}}/>
+              <img src={image} alt= 'imagen' style={{maxHeight: '300px', maxWidth: '300px', borderRadius:'15px'}}/>
               </div>
                 <div style={{alignSelf:'center'}}>
                 <h3>HP: {hp}</h3>
